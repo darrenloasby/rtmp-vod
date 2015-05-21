@@ -1,0 +1,8 @@
+video:
+  # You can use ready image from dockerhub
+  #image: terbooter/rtmp-vod
+  build: .
+  volumes:
+    - flvs:/flvs
+  ports:
+    - "1935:1935"
