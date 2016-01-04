@@ -6,7 +6,7 @@ MAINTAINER Dmitry Zinovyev
 
 RUN apt-get update --fix-missing
 # Add libs
-RUN apt-get install -y git-core gcc pkg-config make libpcre3 libpcre3-dev libssl-dev wget python-software-properties software-properties-common
+RUN DEBIAN_FRONTEND=noninteractiveapt-get install -y git-core gcc pkg-config make libpcre3 libpcre3-dev libssl-dev wget python-software-properties software-properties-common
 
 
 #RUN sudo apt-add-repository multiverse && wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|sudo apt-key add - && sudo echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian kajam main" > /etc/apt/sources.list.d/kaltura.list && sudo apt-get update
