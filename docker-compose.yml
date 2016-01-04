@@ -3,6 +3,6 @@ video:
   #image: terbooter/rtmp-vod
   build: .
   volumes:
-    - /data/darren/seedbox_torrents:/media
+    - /data/darren/seedbox_torrents:/content
   ports:
     - "8886:8886"
