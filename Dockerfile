@@ -17,7 +17,7 @@ RUN wget http://nginx.org/download/nginx-1.8.0.tar.gz
 RUN tar xzf nginx-1.8.0.tar.gz
 
 # compile nginx with rtmp-module
-RUN cd /nginx-1.8.0 && ./configure --add-module=/nginx-vod-module --with-file-aio --with-threads
+RUN cd /nginx-1.8.0 && ./configure --add-module=/nginx-vod-module --with-file-aio --with-threads --with-http_stub_status_module
 RUN cd /nginx-1.8.0 && make && make install
 
 RUN mkdir /content
