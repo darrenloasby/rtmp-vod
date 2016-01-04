@@ -1,11 +1,9 @@
 # Set the base image to Ubuntu
 FROM ubuntu:14.04
 
-# File Author / Maintainer
-MAINTAINER Dmitry Zinovyev
+MAINTAINER Darren Loasby
 
 RUN apt-get update --fix-missing
-# Add libs
 RUN DEBIAN_FRONTEND=noninteractiveapt-get install -y git-core gcc pkg-config make libpcre3 libpcre3-dev libssl-dev wget python-software-properties software-properties-common
 
 
@@ -13,10 +11,8 @@ RUN DEBIAN_FRONTEND=noninteractiveapt-get install -y git-core gcc pkg-config mak
 RUN apt-add-repository multiverse && apt-get update
 
 
-# get latest rtmp-module
 RUN git clone https://github.com/kaltura/nginx-vod-module.git
 
-# get nginx
 RUN wget http://nginx.org/download/nginx-1.8.0.tar.gz
 RUN tar xzf nginx-1.8.0.tar.gz
 
@@ -24,8 +20,8 @@ RUN tar xzf nginx-1.8.0.tar.gz
 RUN cd /nginx-1.8.0 && ./configure --add-module=/nginx-vod-module --with-file-aio --with-threads
 RUN cd /nginx-1.8.0 && make && make install
 
-RUN mkdir /media
-VOLUME /media
+RUN mkdir /content
+VOLUME content
 
 EXPOSE 8886
 #EXPOSE 1935
