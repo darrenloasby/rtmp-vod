@@ -17,17 +17,17 @@ RUN apt-add-repository multiverse && apt-get update
 RUN git clone https://github.com/kaltura/nginx-vod-module.git
 
 # get nginx
-RUN wget http://nginx.org/download/nginx-1.5.9.tar.gz
-RUN tar xzf nginx-1.5.9.tar.gz
+RUN wget http://nginx.org/download/nginx-1.8.0.tar.gz
+RUN tar xzf nginx-1.8.0.tar.gz
 
 # compile nginx with rtmp-module
-RUN cd /nginx-1.5.9 && ./configure --add-module=/nginx-vod-module
-RUN cd /nginx-1.5.9 && make && make install
+RUN cd /nginx-1.8.0 && ./configure --add-module=/nginx-vod-module --with-file-aio --with-threads
+RUN cd /nginx-1.8.0 && make && make install
 
 RUN mkdir /media
 VOLUME /media
 
-EXPOSE 80
+EXPOSE 8886
 #EXPOSE 1935
 
 ADD nginx.conf /usr/local/nginx/conf/
