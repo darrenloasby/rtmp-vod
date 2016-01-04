@@ -21,10 +21,9 @@ RUN cd /nginx-1.8.0 && ./configure --add-module=/nginx-vod-module --with-file-ai
 RUN cd /nginx-1.8.0 && make && make install
 
 RUN mkdir /content
-VOLUME content
+VOLUME /content
 
 EXPOSE 8886
-#EXPOSE 1935
 
 ADD nginx.conf /usr/local/nginx/conf/
 CMD /usr/local/nginx/sbin/nginx
