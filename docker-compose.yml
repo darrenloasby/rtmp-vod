@@ -3,6 +3,6 @@ video:
   #image: terbooter/rtmp-vod
   build: .
   volumes:
-    - flvs:/flvs
+    - /data/darren/seedbox_torrents:/media
   ports:
-    - "1935:1935"
+    - "80:8886"
