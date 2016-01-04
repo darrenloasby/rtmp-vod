@@ -6,24 +6,29 @@ MAINTAINER Dmitry Zinovyev
 
 RUN apt-get update --fix-missing
 # Add libs
-RUN apt-get install -y git-core gcc pkg-config make libpcre3 libpcre3-dev libssl-dev wget
+RUN apt-get install -y git-core gcc pkg-config make libpcre3 libpcre3-dev libssl-dev wget python-software-properties software-properties-common
+
+
+#RUN sudo apt-add-repository multiverse && wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|sudo apt-key add - && sudo echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian kajam main" > /etc/apt/sources.list.d/kaltura.list && sudo apt-get update
+RUN apt-add-repository multiverse && apt-get update
+
 
 # get latest rtmp-module
-RUN git clone git://github.com/arut/nginx-rtmp-module.git
+RUN git clone https://github.com/kaltura/nginx-vod-module.git
 
 # get nginx
 RUN wget http://nginx.org/download/nginx-1.5.9.tar.gz
 RUN tar xzf nginx-1.5.9.tar.gz
 
 # compile nginx with rtmp-module
-RUN cd /nginx-1.5.9 && ./configure --add-module=/nginx-rtmp-module
+RUN cd /nginx-1.5.9 && ./configure --add-module=/nginx-vod-module
 RUN cd /nginx-1.5.9 && make && make install
 
-RUN mkdir /flvs
-VOLUME /flvs
+RUN mkdir /media
+VOLUME /media
 
 EXPOSE 80
-EXPOSE 1935
+#EXPOSE 1935
 
 ADD nginx.conf /usr/local/nginx/conf/
 CMD /usr/local/nginx/sbin/nginx
